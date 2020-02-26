@@ -6,6 +6,16 @@ import threading
 
 lock = threading.Lock()
 
+class DisableStderr(object):
+    def __enter__(self):
+        self.tmp_stderr = sys.stderr
+        self.f = open(os.devnull, 'w')
+        sys.stderr = self.f
+
+    def __exit__(self, *arg, **kwargs):
+        sys.stderr = self.tmp_stderr
+        self.f.close()
+
 
 def disable_stderr_output(func):
     def wrapper(*args, **kwargs):
