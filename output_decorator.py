@@ -1,10 +1,10 @@
 import sys
 import os
-import multiprocessing as mp
+import threading
 
 # ref. https://qiita.com/taigamikami/items/2713856b9f3c3b90f6fd
 
-lock = mp.Lock()
+lock = threading.Lock()
 
 
 def disable_stderr_output(func):
