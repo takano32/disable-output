@@ -14,6 +14,8 @@ def main():
     output_stderr("this is enable stderr.")
     disable_output_stderr("this is disable stderr.")
     output_stderr("this is enable stderr.")
+    with output_decorator.DisableStderr():
+        output_stderr("this is enable stderr.")
     sys.exit(0)
 
 if __name__ == '__main__':
