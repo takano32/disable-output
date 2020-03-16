@@ -10,6 +10,7 @@ class DisableStderr(object):
         self.lock = threading.Lock()
 
     def __enter__(self):
+        self.lock.acquire()
         self.tmp_stderr = sys.stderr
         self.f = open(os.devnull, 'w')
         sys.stderr = self.f
@@ -17,6 +18,7 @@ class DisableStderr(object):
     def __exit__(self, *arg, **kwargs):
         sys.stderr = self.tmp_stderr
         self.f.close()
+        self.lock.release()
 
 
 def disable_stderr_output(func):
